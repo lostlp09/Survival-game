@@ -20,7 +20,6 @@ func _physics_process(delta: float) -> void:
 		clone.position = self.position
 		self.get_parent().add_child(clone)
 		Enemy = null
-	timer += delta
-			
+	timer += delta	
 	self.velocity = Vector2(Input.get_axis("left","right"),Input.get_axis("forward","backwards")).normalized() * 300
 	move_and_slide()
