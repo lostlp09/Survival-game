@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
+
 @onready var player =$"../Player"
 func _physics_process(delta: float) -> void:
 	var direction = (player.position - self.position).normalized()
-	self.velocity = direction * 30
+	self.velocity = direction * 300
 	move_and_slide()
