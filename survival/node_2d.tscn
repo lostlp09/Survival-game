@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bu75n8ukwfj17"]
+[gd_scene load_steps=11 format=3 uid="uid://bu75n8ukwfj17"]
 
 [ext_resource type="Script" uid="uid://1sv668pfpmri" path="res://character_body_2d.gd" id="1_0e48y"]
 [ext_resource type="Script" uid="uid://pcgacjneyw44" path="res://infwave.gd" id="1_q6r6c"]
 [ext_resource type="Texture2D" uid="uid://bsh6xovnipca3" path="res://icon.svg" id="2_epypp"]
 [ext_resource type="Script" uid="uid://bcs747gd3l2bs" path="res://enemy_1.gd" id="3_epypp"]
 [ext_resource type="Script" uid="uid://cbb6xs3rgkp6n" path="res://bulletscript.gd" id="4_0hol4"]
+[ext_resource type="Script" uid="uid://xje0cw3auf2p" path="res://progressbar.gd" id="6_kdubu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdubu"]
 size = Vector2(128, 132.267)
@@ -78,7 +79,51 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
-scale = Vector2(6.26, 6.26)
+scale = Vector2(2.805, 2.805)
 shape = SubResource("RectangleShape2D_q6r6c")
+
+[node name="Xpcontrol" type="Control" parent="Player"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_left = -993.0
+offset_top = -560.0
+offset_right = -546.0
+offset_bottom = -520.0
+scale = Vector2(0.942767, 1)
+
+[node name="ProgressBar" type="ProgressBar" parent="Player/Xpcontrol"]
+layout_mode = 0
+offset_right = 780.0
+offset_bottom = 27.0
+script = ExtResource("6_kdubu")
+
+[node name="Node2D" type="Node2D" parent="Player/Xpcontrol"]
+
+[node name="Button" type="Button" parent="Player/Xpcontrol/Node2D"]
+offset_left = 391.401
+offset_top = -266.0
+offset_right = 561.401
+offset_bottom = -45.0
+scale = Vector2(2.005, 2.005)
+text = "Faster Bullets"
+
+[node name="Button2" type="Button" parent="Player/Xpcontrol/Node2D"]
+offset_left = 890.994
+offset_top = -261.27
+offset_right = 1060.99
+offset_bottom = -40.27
+scale = Vector2(2.005, 2.005)
+text = "More Health
+"
+
+[node name="Button3" type="Button" parent="Player/Xpcontrol/Node2D"]
+offset_left = 1369.37
+offset_top = -256.0
+offset_right = 1549.37
+offset_bottom = -34.9999
+scale = Vector2(2.005, 2.005)
+text = "NEW ATTACK (\"Circle\")
+"
 
 [connection signal="body_entered" from="Storage/bullet/Area2D" to="Storage/bullet" method="_on_area_2d_body_entered"]

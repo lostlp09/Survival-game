@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @onready var player =self.get_parent().get_node("Player")
 func _physics_process(delta: float) -> void:
-	print(self.position.distance_to(player.position))
+
 	var direction = (player.position - self.position).normalized()
 	self.velocity = direction * 150
 	move_and_slide()
