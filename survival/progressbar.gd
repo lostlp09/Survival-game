@@ -13,6 +13,7 @@ func levelup()->void:
 	get_tree().paused = true
 	$"../Node2D".visible = true
 	for i:Button in $"../Node2D".get_children():
+		Upgrades.pick_random().bind(i,self.get_parent().get_parent()).call()
 		spawn(i)
 		await  get_tree().create_timer(0.05).timeout
 
