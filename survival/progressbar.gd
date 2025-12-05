@@ -53,7 +53,7 @@ func speed(button:Button,Player:CharacterBody2D):
 
 	button.pressed.connect(func remove():
 		
-		Player.cooldown -= 0.05
+		Player.cooldown -= 0.5
 		get_tree().paused = false
 		$"../Node2D".visible = false
 		for i in $"../Node2D".get_children():

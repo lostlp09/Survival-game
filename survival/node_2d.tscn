@@ -1,13 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://bu75n8ukwfj17"]
+[gd_scene load_steps=19 format=3 uid="uid://bu75n8ukwfj17"]
 
 [ext_resource type="Script" uid="uid://1sv668pfpmri" path="res://character_body_2d.gd" id="1_0e48y"]
 [ext_resource type="Script" uid="uid://pcgacjneyw44" path="res://infwave.gd" id="1_q6r6c"]
-[ext_resource type="Texture2D" uid="uid://bsh6xovnipca3" path="res://icon.svg" id="2_epypp"]
+[ext_resource type="Texture2D" uid="uid://brhj1ap53ax8d" path="res://Ohne Namen(2)/katana.png" id="3_4d7sh"]
 [ext_resource type="Script" uid="uid://bcs747gd3l2bs" path="res://enemy_1.gd" id="3_epypp"]
 [ext_resource type="Script" uid="uid://cbb6xs3rgkp6n" path="res://bulletscript.gd" id="4_0hol4"]
 [ext_resource type="Script" uid="uid://gje2f0jr1bg2" path="res://panel.gd" id="5_rj586"]
 [ext_resource type="Script" uid="uid://xje0cw3auf2p" path="res://progressbar.gd" id="6_kdubu"]
 [ext_resource type="Script" uid="uid://c1n4xknwtik4w" path="res://health.gd" id="7_d21ai"]
+[ext_resource type="Texture2D" uid="uid://bhvxcpd0af7fc" path="res://Ohne Namen(2)/Screenshot 2025-11-30 204951.png" id="9_4d7sh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdubu"]
 size = Vector2(128, 132.267)
@@ -33,6 +34,9 @@ bg_color = Color(2.81565e-06, 0.609098, 0.117314, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d21ai"]
 bg_color = Color(1.15514e-06, 0.351911, 0.458905, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4d7sh"]
+size = Vector2(2928.5, 39)
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_q6r6c")
 
@@ -42,7 +46,6 @@ script = ExtResource("1_q6r6c")
 process_mode = 4
 position = Vector2(-423, 40)
 scale = Vector2(0.78125, 0.234375)
-texture = ExtResource("2_epypp")
 script = ExtResource("4_0hol4")
 
 [node name="Area2D" type="Area2D" parent="Storage/bullet"]
@@ -51,9 +54,16 @@ script = ExtResource("4_0hol4")
 position = Vector2(0, 2.13335)
 shape = SubResource("RectangleShape2D_kdubu")
 
+[node name="Katana" type="Sprite2D" parent="Storage/bullet"]
+position = Vector2(3.83998, -17.0667)
+rotation = 1.75231
+scale = Vector2(0.438953, 0.161516)
+skew = 0.556204
+texture = ExtResource("3_4d7sh")
+
 [node name="Enemy1" type="CharacterBody2D" parent="Storage"]
 process_mode = 4
-position = Vector2(-721, -187)
+position = Vector2(-727, -187)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("3_epypp")
@@ -87,6 +97,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_4d7sh")
 script = ExtResource("5_rj586")
 
 [node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(1, 8)
 collision_layer = 9
 collision_mask = 9
 script = ExtResource("1_0e48y")
@@ -140,5 +151,31 @@ offset_top = -34.0
 offset_right = 32.0
 offset_bottom = 32.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_d21ai")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(94, 1102)
+shape = SubResource("RectangleShape2D_4d7sh")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(94, -1637)
+shape = SubResource("RectangleShape2D_4d7sh")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1434.5, -254.25)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_4d7sh")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-1251, -260)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_4d7sh")
+
+[node name="Screenshot2025-11-30204951" type="Sprite2D" parent="."]
+z_index = -80
+position = Vector2(179, -177)
+scale = Vector2(5, 5)
+texture = ExtResource("9_4d7sh")
 
 [connection signal="body_entered" from="Storage/bullet/Area2D" to="Storage/bullet" method="_on_area_2d_body_entered"]

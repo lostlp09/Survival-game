@@ -10,8 +10,9 @@ func _ready() -> void:
 	while alive == true:
 		allspawned = false
 		for i in range(0,(anzahl +1) *2):
+	
 			var clone= $Storage/Enemy1.duplicate()
-			clone.position = Vector2(0,8)
+			clone.position = Vector2(randi_range(-1100,1300),randi_range(-1500,950))
 			Enemys.append(clone)
 			clone.process_mode = Node.PROCESS_MODE_INHERIT
 			self.add_child(clone)

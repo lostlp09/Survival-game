@@ -2,20 +2,24 @@ extends Sprite2D
 @export var  Enemy =  0
 @export var Damage = 20
 @onready var player
-
+var enemyfound = false
 var Xp = preload("res://xp.tscn")
-
+var time = 0
 func _ready() -> void:
 	player = self.get_parent().get_node("Player")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-
+	time += delta
+	if time >= 0.5 and Enemy == null:
+		self.queue_free()
 	if Enemy != null:
+		time = 0
+		enemyfound = true
 		var direction = (Enemy.position - self.position).normalized()
 		self.position += direction * 5
 		self.look_at(Enemy.position)
-
-
+	elif enemyfound == true and $Area2D.has_overlapping_bodies() == false and Enemy == null:
+		self.queue_free()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == Enemy:
