@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bu75n8ukwfj17"]
+[gd_scene load_steps=17 format=3 uid="uid://bu75n8ukwfj17"]
 
 [ext_resource type="Script" uid="uid://1sv668pfpmri" path="res://character_body_2d.gd" id="1_0e48y"]
 [ext_resource type="Script" uid="uid://pcgacjneyw44" path="res://infwave.gd" id="1_q6r6c"]
 [ext_resource type="Texture2D" uid="uid://bsh6xovnipca3" path="res://icon.svg" id="2_epypp"]
 [ext_resource type="Script" uid="uid://bcs747gd3l2bs" path="res://enemy_1.gd" id="3_epypp"]
 [ext_resource type="Script" uid="uid://cbb6xs3rgkp6n" path="res://bulletscript.gd" id="4_0hol4"]
+[ext_resource type="Script" uid="uid://gje2f0jr1bg2" path="res://panel.gd" id="5_rj586"]
 [ext_resource type="Script" uid="uid://xje0cw3auf2p" path="res://progressbar.gd" id="6_kdubu"]
 [ext_resource type="Script" uid="uid://c1n4xknwtik4w" path="res://health.gd" id="7_d21ai"]
 
@@ -17,6 +18,9 @@ size = Vector2(129, 129)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d21ai"]
 size = Vector2(142, 143)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4d7sh"]
+bg_color = Color(1, 1, 1, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_epypp"]
 size = Vector2(63.5, 65.5)
 
@@ -26,11 +30,13 @@ radius = 405.415
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rj586"]
 bg_color = Color(2.81565e-06, 0.609098, 0.117314, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d21ai"]
+bg_color = Color(1.15514e-06, 0.351911, 0.458905, 1)
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_q6r6c")
 
 [node name="Storage" type="Node2D" parent="."]
-visible = false
 
 [node name="bullet" type="Sprite2D" parent="Storage"]
 process_mode = 4
@@ -52,9 +58,6 @@ collision_layer = 3
 collision_mask = 3
 script = ExtResource("3_epypp")
 
-[node name="Icon" type="Sprite2D" parent="Storage/Enemy1"]
-texture = ExtResource("2_epypp")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Storage/Enemy1"]
 position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_0hol4")
@@ -75,14 +78,18 @@ collision_mask = 8
 position = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_d21ai")
 
+[node name="Panel" type="Panel" parent="Storage/Enemy1"]
+offset_left = -65.0
+offset_top = -65.0
+offset_right = 65.0
+offset_bottom = 65.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4d7sh")
+script = ExtResource("5_rj586")
+
 [node name="Player" type="CharacterBody2D" parent="."]
 collision_layer = 9
 collision_mask = 9
 script = ExtResource("1_0e48y")
-
-[node name="Icon" type="Sprite2D" parent="Player"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_epypp")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(0.58, 0.58)
@@ -126,5 +133,12 @@ offset_bottom = 28.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_rj586")
 value = 100.0
 script = ExtResource("7_d21ai")
+
+[node name="Panel" type="Panel" parent="Player"]
+offset_left = -32.0
+offset_top = -34.0
+offset_right = 32.0
+offset_bottom = 32.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_d21ai")
 
 [connection signal="body_entered" from="Storage/bullet/Area2D" to="Storage/bullet" method="_on_area_2d_body_entered"]
