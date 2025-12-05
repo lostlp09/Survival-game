@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://clfme101h8r00"]
 
 [ext_resource type="Script" uid="uid://2k3by17r2e67" path="res://xp.gd" id="1_1jxo8"]
-[ext_resource type="Texture2D" uid="uid://bsh6xovnipca3" path="res://icon.svg" id="1_kl4lw"]
+[ext_resource type="Texture2D" uid="uid://dcyvv7quuhrew" path="res://Ohne Namen(2)/Ellipse 22.png" id="2_1jxo8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kl4lw"]
-radius = 2.23607
+radius = 156.235
 
 [node name="Xp" type="Node2D"]
 scale = Vector2(0.46, 0.46)
@@ -13,7 +13,7 @@ script = ExtResource("1_1jxo8")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-0.12, -0.12)
 scale = Vector2(0.46, 0.46)
-texture = ExtResource("1_kl4lw")
+texture = ExtResource("2_1jxo8")
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(0.46, 0.46)

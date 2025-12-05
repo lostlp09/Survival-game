@@ -1,14 +1,15 @@
-[gd_scene load_steps=19 format=3 uid="uid://bu75n8ukwfj17"]
+[gd_scene load_steps=21 format=3 uid="uid://bu75n8ukwfj17"]
 
 [ext_resource type="Script" uid="uid://1sv668pfpmri" path="res://character_body_2d.gd" id="1_0e48y"]
 [ext_resource type="Script" uid="uid://pcgacjneyw44" path="res://infwave.gd" id="1_q6r6c"]
-[ext_resource type="Texture2D" uid="uid://brhj1ap53ax8d" path="res://Ohne Namen(2)/katana.png" id="3_4d7sh"]
 [ext_resource type="Script" uid="uid://bcs747gd3l2bs" path="res://enemy_1.gd" id="3_epypp"]
 [ext_resource type="Script" uid="uid://cbb6xs3rgkp6n" path="res://bulletscript.gd" id="4_0hol4"]
 [ext_resource type="Script" uid="uid://gje2f0jr1bg2" path="res://panel.gd" id="5_rj586"]
 [ext_resource type="Script" uid="uid://xje0cw3auf2p" path="res://progressbar.gd" id="6_kdubu"]
 [ext_resource type="Script" uid="uid://c1n4xknwtik4w" path="res://health.gd" id="7_d21ai"]
 [ext_resource type="Texture2D" uid="uid://bhvxcpd0af7fc" path="res://Ohne Namen(2)/Screenshot 2025-11-30 204951.png" id="9_4d7sh"]
+[ext_resource type="PackedScene" uid="uid://blwx23gk0rt3t" path="res://katana_2.tscn" id="9_hqns4"]
+[ext_resource type="Texture2D" uid="uid://cwucyn2m2x5e1" path="res://katana.png" id="9_ir8iy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdubu"]
 size = Vector2(128, 132.267)
@@ -26,7 +27,7 @@ bg_color = Color(1, 1, 1, 1)
 size = Vector2(63.5, 65.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d21ai"]
-radius = 405.415
+radius = 646.343
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rj586"]
 bg_color = Color(2.81565e-06, 0.609098, 0.117314, 1)
@@ -37,6 +38,9 @@ bg_color = Color(1.15514e-06, 0.351911, 0.458905, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4d7sh"]
 size = Vector2(2928.5, 39)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hqns4"]
+load_path = "res://.godot/imported/katana.png-88e85f1d609ec63cd1c0c1826f6a3ea9.ctex"
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_q6r6c")
 
@@ -44,7 +48,7 @@ script = ExtResource("1_q6r6c")
 
 [node name="bullet" type="Sprite2D" parent="Storage"]
 process_mode = 4
-position = Vector2(-423, 40)
+position = Vector2(-423, 48)
 scale = Vector2(0.78125, 0.234375)
 script = ExtResource("4_0hol4")
 
@@ -55,11 +59,11 @@ position = Vector2(0, 2.13335)
 shape = SubResource("RectangleShape2D_kdubu")
 
 [node name="Katana" type="Sprite2D" parent="Storage/bullet"]
-position = Vector2(3.83998, -17.0667)
-rotation = 1.75231
+position = Vector2(12.8, 21.3333)
+rotation = 1.32302
 scale = Vector2(0.438953, 0.161516)
 skew = 0.556204
-texture = ExtResource("3_4d7sh")
+texture = ExtResource("9_ir8iy")
 
 [node name="Enemy1" type="CharacterBody2D" parent="Storage"]
 process_mode = 4
@@ -96,8 +100,11 @@ offset_bottom = 65.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_4d7sh")
 script = ExtResource("5_rj586")
 
+[node name="bullet2" type="Node2D" parent="Storage"]
+position = Vector2(-599, 356)
+
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(1, 8)
+position = Vector2(-62, 228)
 collision_layer = 9
 collision_mask = 9
 script = ExtResource("1_0e48y")
@@ -152,6 +159,10 @@ offset_right = 32.0
 offset_bottom = 32.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_d21ai")
 
+[node name="Katana2" parent="Player" instance=ExtResource("9_hqns4")]
+position = Vector2(383, -469)
+rotation = 4.01426
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
@@ -177,5 +188,10 @@ z_index = -80
 position = Vector2(179, -177)
 scale = Vector2(5, 5)
 texture = ExtResource("9_4d7sh")
+
+[node name="Katana" type="Sprite2D" parent="."]
+position = Vector2(-2966, -220)
+scale = Vector2(0.193182, 0.17379)
+texture = SubResource("CompressedTexture2D_hqns4")
 
 [connection signal="body_entered" from="Storage/bullet/Area2D" to="Storage/bullet" method="_on_area_2d_body_entered"]

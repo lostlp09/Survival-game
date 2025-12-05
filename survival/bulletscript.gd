@@ -6,6 +6,7 @@ var enemyfound = false
 var Xp = preload("res://xp.tscn")
 var time = 0
 func _ready() -> void:
+
 	player = self.get_parent().get_node("Player")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -41,6 +42,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				var clone = Xp.instantiate()
 				clone.position = body.position +Vector2(0,i * 10)
 				self.get_parent().add_child(clone)
-				
 			body.queue_free()
-		
+
+	

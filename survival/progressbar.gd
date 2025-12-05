@@ -5,7 +5,7 @@ extends ProgressBar
 var Upgrades = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Upgrades = [speed,damage]
+	Upgrades = [speed,damage,regen,morehealth,lifesteal,ploayerspeed]
 	levelup()
 	xpclaim = xpclaimed
 	pass # Replace with function body.
@@ -15,7 +15,7 @@ func levelup()->void:
 	for i in range(0,3):
 		var Knopf = Button.new()
 		Knopf.position = Vector2(500 + 400 * i,-266)
-
+		Knopf.z_index = 100
 		Knopf.size = Vector2(300,500)
 		$"../Node2D".add_child(Knopf)
 		Upgrades.pick_random().bind(Knopf,self.get_parent().get_parent()).call()
@@ -31,8 +31,6 @@ func spawn(button):
 
 			await get_tree().create_timer(0.01).timeout
 func xpclaimed():
-
-	
 	Value += 10
 	if Value >= self.max_value:
 		Value -= self.max_value
@@ -81,7 +79,7 @@ func regen(button:Button,Player:CharacterBody2D):
 func morehealth(button:Button,Player:CharacterBody2D):
 	button.text = "More Health"
 	button.pressed.connect(func remove():
-		$"../Health".max_value +5
+		$"../Health".max_value +=5
 		get_tree().paused = false
 		$"../Node2D".visible = false
 		for i in $"../Node2D".get_children():
@@ -91,6 +89,15 @@ func lifesteal(button:Button,Player:CharacterBody2D):
 	button.text = "life steal"
 	button.pressed.connect(func remove():
 		Player.lifesteal += 2
+		get_tree().paused = false
+		$"../Node2D".visible = false
+		for i in $"../Node2D".get_children():
+			i.queue_free()
+		)
+func ploayerspeed(button:Button,Player:CharacterBody2D):
+	button.text = "Player speed"
+	button.pressed.connect(func remove():
+		Player.speed+= 0.1
 		get_tree().paused = false
 		$"../Node2D".visible = false
 		for i in $"../Node2D".get_children():

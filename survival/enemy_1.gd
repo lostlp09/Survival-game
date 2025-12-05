@@ -11,6 +11,6 @@ func _physics_process(delta: float) -> void:
 	if Area2d.has_overlapping_bodies():
 		if time >= 1:
 			time = 0
-			Area2d.get_overlapping_bodies()[0].Health -= 20
+			Area2d.get_overlapping_bodies()[0].Health -= 3
 			print("kill")
 			

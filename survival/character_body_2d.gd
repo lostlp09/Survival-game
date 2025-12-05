@@ -5,6 +5,11 @@ var Enemy = null
 @export var cooldown  = 1
 @export var Health = 100
 @export var lifesteal = 1
+@export var speed = 1
+@onready var  Katana = preload("res://katana_2.tscn")
+@onready var root = $".."
+
+
 
 func _physics_process(delta: float) -> void:
 
@@ -23,7 +28,22 @@ func _physics_process(delta: float) -> void:
 		clone.process_mode = Node.PROCESS_MODE_INHERIT
 		clone.position = self.position
 		self.get_parent().add_child(clone)
+
 		Enemy = null
 	timer += delta	
-	self.velocity = Vector2(Input.get_axis("left","right"),Input.get_axis("forward","backwards")).normalized() * 300
-	move_and_slide()
+	self.velocity = Vector2(Input.get_axis("left","right"),Input.get_axis("forward","backwards")).normalized() * 300 * speed
+	move_and_slide()                                                                                      #bottom 
+var Aray= [Vector2(0,150) *-1,Vector2(-106.565,106.565) * -1,Vector2(150,0),Vector2(106.565,106.565),Vector2(0,150) ,Vector2(-106.565,106.565),Vector2(150,0) * -1,Vector2(106.565,106.565) * -1]
+func circlekatana()->void:
+	
+	var rotationdegrees = 180
+	for i in Aray:
+		
+		var clone = Katana.instantiate()
+		root.add_child.call(clone)
+		clone.position = self.position + i
+		clone.rotation_degrees = rotationdegrees
+		
+		rotationdegrees +=45
+		
+		
