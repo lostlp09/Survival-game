@@ -8,8 +8,8 @@
 [ext_resource type="Script" uid="uid://xje0cw3auf2p" path="res://progressbar.gd" id="6_kdubu"]
 [ext_resource type="Script" uid="uid://c1n4xknwtik4w" path="res://health.gd" id="7_d21ai"]
 [ext_resource type="Texture2D" uid="uid://bhvxcpd0af7fc" path="res://Ohne Namen(2)/Screenshot 2025-11-30 204951.png" id="9_4d7sh"]
-[ext_resource type="PackedScene" uid="uid://blwx23gk0rt3t" path="res://katana_2.tscn" id="9_hqns4"]
 [ext_resource type="Texture2D" uid="uid://cwucyn2m2x5e1" path="res://katana.png" id="9_ir8iy"]
+[ext_resource type="Texture2D" uid="uid://batf4l5c8o7g0" path="res://Group 10.png" id="10_ir8iy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdubu"]
 size = Vector2(128, 132.267)
@@ -44,6 +44,15 @@ load_path = "res://.godot/imported/katana.png-88e85f1d609ec63cd1c0c1826f6a3ea9.c
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_q6r6c")
 
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -5
+offset_left = -1366.0
+offset_top = -1066.0
+offset_right = 1705.0
+offset_bottom = 1589.0
+texture = ExtResource("10_ir8iy")
+stretch_mode = 1
+
 [node name="Storage" type="Node2D" parent="."]
 
 [node name="bullet" type="Sprite2D" parent="Storage"]
@@ -65,7 +74,7 @@ scale = Vector2(0.438953, 0.161516)
 skew = 0.556204
 texture = ExtResource("9_ir8iy")
 
-[node name="Enemy1" type="CharacterBody2D" parent="Storage"]
+[node name="Enemy1" type="CharacterBody2D" parent="Storage" groups=["enemy"]]
 process_mode = 4
 position = Vector2(-727, -187)
 collision_layer = 3
@@ -158,10 +167,6 @@ offset_top = -34.0
 offset_right = 32.0
 offset_bottom = 32.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_d21ai")
-
-[node name="Katana2" parent="Player" instance=ExtResource("9_hqns4")]
-position = Vector2(383, -469)
-rotation = 4.01426
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

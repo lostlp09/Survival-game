@@ -32,8 +32,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				self.get_parent().nextwavepls.call()
 	
 
-			if player.Health  + player.lifesteal > 100:
-				player.Health = 100
+			if player.Health  + player.lifesteal >player.get_node("Xpcontrol").get_node("Health").max_value:
+				player.Health =player.get_node("Xpcontrol").get_node("Health").max_value
 			else:
 				player.Health += player.lifesteal
 
@@ -43,5 +43,3 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				clone.position = body.position +Vector2(0,i * 10)
 				self.get_parent().add_child(clone)
 			body.queue_free()
-
-	

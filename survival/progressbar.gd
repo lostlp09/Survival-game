@@ -5,7 +5,7 @@ extends ProgressBar
 var Upgrades = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Upgrades = [speed,damage,regen,morehealth,lifesteal,ploayerspeed]
+	Upgrades = [speed,damage,regen,morehealth,lifesteal,ploayerspeed,switchcombat]
 	levelup()
 	xpclaim = xpclaimed
 	pass # Replace with function body.
@@ -47,11 +47,12 @@ func  easeOutCirc(x:float ):
 	return sqrt(1 - pow(x - 1, 2))
 
 func speed(button:Button,Player:CharacterBody2D):
-	button.text = "speedupgrade"
+	button.text = "faster-shooting"
 
 	button.pressed.connect(func remove():
-		
-		Player.cooldown -= 0.5
+		if Player.cooldown <= 0.1:
+			Upgrades.reduce(speed)
+		Player.cooldown -= 0.1
 		get_tree().paused = false
 		$"../Node2D".visible = false
 		for i in $"../Node2D".get_children():
@@ -69,8 +70,11 @@ func damage(button:Button,Player:CharacterBody2D):
 		)
 func regen(button:Button,Player:CharacterBody2D):
 	button.text = "Healup"
-	button.pressed.connect(func remove():
-		Player.Health += 20
+	button.pressed.connect(func remove():#
+		if Player.Health + 20 >$"../Health".max_value:
+			Player.Health = $"../Health".max_value
+		else:
+			Player.Health += 20
 		get_tree().paused = false
 		$"../Node2D".visible = false
 		for i in $"../Node2D".get_children():
@@ -103,3 +107,14 @@ func ploayerspeed(button:Button,Player:CharacterBody2D):
 		for i in $"../Node2D".get_children():
 			i.queue_free()
 		)
+func switchcombat(button:Button,Player:CharacterBody2D):
+	button.text = "Combat switch"
+	button.pressed.connect(func remove():
+		Player.circleshootmode = true
+		Upgrades.erase(switchcombat)
+		get_tree().paused = false
+		$"../Node2D".visible = false
+		for i in $"../Node2D".get_children():
+			i.queue_free()
+		)
+		

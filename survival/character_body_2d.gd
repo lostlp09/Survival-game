@@ -8,28 +8,34 @@ var Enemy = null
 @export var speed = 1
 @onready var  Katana = preload("res://katana_2.tscn")
 @onready var root = $".."
-
+@export var circleshootmode = false
 
 
 func _physics_process(delta: float) -> void:
+	
+	if  Input.is_action_just_pressed("test"):
+		circlekatana()
 
 	if timer >= cooldown and $Area2D.has_overlapping_bodies():
 		timer = 0
-		var shortest_distance = 1000000
-		for i in $Area2D.get_overlapping_bodies():
-			if i != self:
-				if self.position.distance_to(i.position)<= shortest_distance:
-					shortest_distance = self.position.distance_to(i.position)
-					Enemy = i
-				
-		var clone = $"../Storage/bullet".duplicate()
-		clone.Enemy = Enemy
-		clone.Damage = Damage
-		clone.process_mode = Node.PROCESS_MODE_INHERIT
-		clone.position = self.position
-		self.get_parent().add_child(clone)
+		if circleshootmode == false:
+			var shortest_distance = 1000000
+			for i in $Area2D.get_overlapping_bodies():
+				if i != self:
+					if self.position.distance_to(i.position)<= shortest_distance:
+						shortest_distance = self.position.distance_to(i.position)
+						Enemy = i
+					
+			var clone = $"../Storage/bullet".duplicate()
+			clone.Enemy = Enemy
+			clone.Damage = Damage
+			clone.process_mode = Node.PROCESS_MODE_INHERIT
+			clone.position = self.position
+			self.get_parent().add_child(clone)
 
-		Enemy = null
+			Enemy = null
+		else:
+			circlekatana()
 	timer += delta	
 	self.velocity = Vector2(Input.get_axis("left","right"),Input.get_axis("forward","backwards")).normalized() * 300 * speed
 	move_and_slide()                                                                                      #bottom 
