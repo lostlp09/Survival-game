@@ -8,6 +8,7 @@ var anzahl = 0
 func _ready() -> void:
 	nextwavepls= nextwave
 	while alive == true:
+		$Player/Label.text = "Wave:" + str(anzahl +1)
 		allspawned = false
 		for i in range(0,(anzahl +1) *2):
 	

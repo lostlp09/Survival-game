@@ -1,3 +1,23 @@
-[gd_scene format=3 uid="uid://cgi12mearkci7"]
+[gd_scene load_steps=2 format=3 uid="uid://cgi12mearkci7"]
+
+[ext_resource type="Script" uid="uid://yc5lpt04m6sq" path="res://button.gd" id="1_qemge"]
 
 [node name="Death" type="Node2D"]
+
+[node name="Button" type="Button" parent="."]
+offset_left = 141.0
+offset_top = 274.0
+offset_right = 1009.89
+offset_bottom = 611.0
+scale = Vector2(0.91, 0.91)
+theme_override_font_sizes/font_size = 241
+text = "Replay"
+script = ExtResource("1_qemge")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 224.0
+offset_top = -12.0
+offset_right = 1085.0
+offset_bottom = 215.0
+theme_override_font_sizes/font_size = 166
+text = "You Died"

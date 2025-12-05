@@ -51,7 +51,7 @@ func speed(button:Button,Player:CharacterBody2D):
 
 	button.pressed.connect(func remove():
 		if Player.cooldown <= 0.1:
-			Upgrades.reduce(speed)
+			Upgrades.erase(speed)
 		Player.cooldown -= 0.1
 		get_tree().paused = false
 		$"../Node2D".visible = false

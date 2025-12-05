@@ -2,7 +2,7 @@ extends CharacterBody2D
 var timer = 3
 var Enemy = null
 @export var  Damage = 20
-@export var cooldown  = 1
+@export var cooldown  = 0.1
 @export var Health = 100
 @export var lifesteal = 1
 @export var speed = 1
