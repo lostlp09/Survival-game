@@ -17,7 +17,6 @@ func _ready() -> void:
 			Enemys.append(clone)
 			clone.process_mode = Node.PROCESS_MODE_INHERIT
 			self.add_child(clone)
-		
 			await  get_tree().create_timer(1).timeout
 		allspawned = true	
 		anzahl += 1

@@ -30,7 +30,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				player.Health = player.get_node("Xpcontrol").get_node("Health").max_value
 			else:
 				player.Health += player.lifesteal
-				player.Health += player.lifesteal
 			for i in range(0,randi_range(3,6)):
 				var clone = Xp.instantiate()
 				clone.position = body.position +Vector2(0,i * 10)

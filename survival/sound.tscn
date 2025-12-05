@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://djaihc65m12yg"]
+
+[ext_resource type="AudioStream" uid="uid://bu10fro7box3n" path="res://bamboo-whoosh-429156(1).mp3" id="1_3j8lq"]
+[ext_resource type="Script" uid="uid://dlv1n6jdxff35" path="res://audio_stream_player_2d.gd" id="2_7ywqe"]
+
+[node name="Sound" type="Node2D"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_3j8lq")
+autoplay = true
+script = ExtResource("2_7ywqe")

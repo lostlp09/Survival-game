@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bu75n8ukwfj17"]
+[gd_scene load_steps=23 format=3 uid="uid://bu75n8ukwfj17"]
 
 [ext_resource type="Script" uid="uid://1sv668pfpmri" path="res://character_body_2d.gd" id="1_0e48y"]
 [ext_resource type="Script" uid="uid://pcgacjneyw44" path="res://infwave.gd" id="1_q6r6c"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://db3ng8q1wwl4e" path="res://green-bush-clipart-xl.png" id="10_hqns4"]
 [ext_resource type="Texture2D" uid="uid://batf4l5c8o7g0" path="res://Group 10.png" id="10_ir8iy"]
 [ext_resource type="AudioStream" uid="uid://dg81vnghx5hdq" path="res://Ohne Namen(2)/Untitled(1).mp3" id="10_x0ka3"]
-[ext_resource type="Script" uid="uid://xbnixnvcqlc2" path="res://pausemenue.gd" id="11_0h7mo"]
 [ext_resource type="Script" uid="uid://bkyw1cfr2gabr" path="res://h_slider.gd" id="11_x0ka3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdubu"]
@@ -178,8 +177,6 @@ offset_right = 911.762
 offset_bottom = 32.0
 text = "HP"
 
-[node name="Node2D" type="Node2D" parent="Player/Xpcontrol"]
-
 [node name="Panel" type="Panel" parent="Player"]
 offset_left = -32.0
 offset_top = -34.0
@@ -197,7 +194,6 @@ text = "Wave:0"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource("10_x0ka3")
-volume_db = 24.0
 autoplay = true
 parameters/looping = true
 
@@ -205,20 +201,13 @@ parameters/looping = true
 position = Vector2(-993, -560)
 scale = Vector2(0.942767, 1)
 
-[node name="pausemenue" type="Node2D" parent="Player"]
-process_mode = 3
-z_index = 275
-position = Vector2(-1049, -611)
-script = ExtResource("11_0h7mo")
-
-[node name="Panel" type="Panel" parent="Player/pausemenue"]
-visible = false
+[node name="Panel" type="Panel" parent="Player/Node2D"]
 offset_left = 605.0
 offset_top = 274.0
 offset_right = 1628.0
 offset_bottom = 862.0
 
-[node name="Label" type="Label" parent="Player/pausemenue/Panel"]
+[node name="Label" type="Label" parent="Player/Node2D/Panel"]
 layout_mode = 0
 offset_left = 356.001
 offset_top = -24.0
@@ -227,15 +216,16 @@ offset_bottom = 134.0
 theme_override_font_sizes/font_size = 81
 text = "Settings"
 
-[node name="HSlider" type="HSlider" parent="Player/pausemenue/Panel"]
-offset_left = 318.0
+[node name="HSlider" type="HSlider" parent="Player/Node2D/Panel"]
+offset_left = 315.694
 offset_top = 228.0
-offset_right = 730.0
+offset_right = 727.694
 offset_bottom = 244.0
+max_value = 24.0
 value = 24.0
 script = ExtResource("11_x0ka3")
 
-[node name="Label2" type="Label" parent="Player/pausemenue/Panel/HSlider"]
+[node name="Label2" type="Label" parent="Player/Node2D/Panel/HSlider"]
 layout_mode = 0
 offset_left = 417.919
 offset_top = -5.0
@@ -243,13 +233,35 @@ offset_right = 457.919
 offset_bottom = 18.0
 text = "100"
 
-[node name="Label2" type="Label" parent="Player/pausemenue/Panel"]
+[node name="HSlider2" type="HSlider" parent="Player/Node2D/Panel"]
+offset_left = 316.755
+offset_top = 344.0
+offset_right = 728.755
+offset_bottom = 360.0
+value = 100.0
+
+[node name="Label2" type="Label" parent="Player/Node2D/Panel/HSlider2"]
+layout_mode = 0
+offset_left = 417.919
+offset_top = -5.0
+offset_right = 457.919
+offset_bottom = 18.0
+text = "100"
+
+[node name="Label2" type="Label" parent="Player/Node2D/Panel"]
 layout_mode = 0
 offset_left = 492.832
 offset_top = 209.0
 offset_right = 704.832
 offset_bottom = 232.0
 text = "Music"
+
+[node name="Label3" type="Label" parent="Player/Node2D/Panel"]
+offset_left = 468.436
+offset_top = 324.0
+offset_right = 680.436
+offset_bottom = 347.0
+text = "Sound effects"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

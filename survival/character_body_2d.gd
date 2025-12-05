@@ -9,14 +9,14 @@ var Enemy = null
 @onready var  Katana = preload("res://katana_2.tscn")
 @onready var root = $".."
 @export var circleshootmode = false
-
+var audiofile = preload("res://sound.tscn")
 
 func _physics_process(delta: float) -> void:
 	
-	if  Input.is_action_just_pressed("test"):
-		circlekatana()
+
 
 	if timer >= cooldown and $Area2D.has_overlapping_bodies():
+		self.add_child(audiofile.instantiate())
 		timer = 0
 		if circleshootmode == false:
 			var shortest_distance = 1000000
