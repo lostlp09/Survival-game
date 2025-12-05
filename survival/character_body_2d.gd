@@ -1,7 +1,10 @@
 extends CharacterBody2D
 var timer = 3
 var Enemy = null
+@export var  Damage = 20
 @export var cooldown  = 1
+@export var Health = 100
+@export var lifesteal = 1
 
 func _physics_process(delta: float) -> void:
 
@@ -16,6 +19,7 @@ func _physics_process(delta: float) -> void:
 				
 		var clone = $"../Storage/bullet".duplicate()
 		clone.Enemy = Enemy
+		clone.Damage = Damage
 		clone.process_mode = Node.PROCESS_MODE_INHERIT
 		clone.position = self.position
 		self.get_parent().add_child(clone)

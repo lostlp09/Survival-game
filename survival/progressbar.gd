@@ -5,16 +5,21 @@ extends ProgressBar
 var Upgrades = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Upgrades = [speed]
+	Upgrades = [speed,damage]
 	levelup()
 	xpclaim = xpclaimed
 	pass # Replace with function body.
 func levelup()->void:
 	get_tree().paused = true
 	$"../Node2D".visible = true
-	for i:Button in $"../Node2D".get_children():
-		Upgrades.pick_random().bind(i,self.get_parent().get_parent()).call()
-		spawn(i)
+	for i in range(0,3):
+		var Knopf = Button.new()
+		Knopf.position = Vector2(500 + 400 * i,-266)
+
+		Knopf.size = Vector2(300,500)
+		$"../Node2D".add_child(Knopf)
+		Upgrades.pick_random().bind(Knopf,self.get_parent().get_parent()).call()
+		spawn(Knopf)
 		await  get_tree().create_timer(0.05).timeout
 
 func spawn(button):
@@ -23,10 +28,10 @@ func spawn(button):
 			
 			x +=0.01
 			button.position.y += easeOutCirc(x) * 40
-			print(easeOutCirc(x) * 100)
+
 			await get_tree().create_timer(0.01).timeout
 func xpclaimed():
-	print("test")
+
 	
 	Value += 10
 	if Value >= self.max_value:
@@ -45,5 +50,49 @@ func  easeOutCirc(x:float ):
 
 func speed(button:Button,Player:CharacterBody2D):
 	button.text = "speedupgrade"
-	pass
-	
+
+	button.pressed.connect(func remove():
+		
+		Player.cooldown -= 0.05
+		get_tree().paused = false
+		$"../Node2D".visible = false
+		for i in $"../Node2D".get_children():
+			i.queue_free()
+		)
+
+func damage(button:Button,Player:CharacterBody2D):
+	button.text = "Damage"
+	button.pressed.connect(func remove():
+		Player.Damage += 1
+		get_tree().paused = false
+		$"../Node2D".visible = false
+		for i in $"../Node2D".get_children():
+			i.queue_free()
+		)
+func regen(button:Button,Player:CharacterBody2D):
+	button.text = "Healup"
+	button.pressed.connect(func remove():
+		Player.Health += 20
+		get_tree().paused = false
+		$"../Node2D".visible = false
+		for i in $"../Node2D".get_children():
+			i.queue_free()
+		)
+func morehealth(button:Button,Player:CharacterBody2D):
+	button.text = "More Health"
+	button.pressed.connect(func remove():
+		$"../Health".max_value +5
+		get_tree().paused = false
+		$"../Node2D".visible = false
+		for i in $"../Node2D".get_children():
+			i.queue_free()
+		)
+func lifesteal(button:Button,Player:CharacterBody2D):
+	button.text = "life steal"
+	button.pressed.connect(func remove():
+		Player.lifesteal += 2
+		get_tree().paused = false
+		$"../Node2D".visible = false
+		for i in $"../Node2D".get_children():
+			i.queue_free()
+		)

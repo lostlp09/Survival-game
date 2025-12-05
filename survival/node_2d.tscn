@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bu75n8ukwfj17"]
+[gd_scene load_steps=14 format=3 uid="uid://bu75n8ukwfj17"]
 
 [ext_resource type="Script" uid="uid://1sv668pfpmri" path="res://character_body_2d.gd" id="1_0e48y"]
 [ext_resource type="Script" uid="uid://pcgacjneyw44" path="res://infwave.gd" id="1_q6r6c"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bcs747gd3l2bs" path="res://enemy_1.gd" id="3_epypp"]
 [ext_resource type="Script" uid="uid://cbb6xs3rgkp6n" path="res://bulletscript.gd" id="4_0hol4"]
 [ext_resource type="Script" uid="uid://xje0cw3auf2p" path="res://progressbar.gd" id="6_kdubu"]
+[ext_resource type="Script" uid="uid://c1n4xknwtik4w" path="res://health.gd" id="7_d21ai"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdubu"]
 size = Vector2(128, 132.267)
@@ -13,11 +14,17 @@ size = Vector2(128, 132.267)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0hol4"]
 size = Vector2(129, 129)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d21ai"]
+size = Vector2(142, 143)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_epypp"]
 size = Vector2(63.5, 65.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6r6c"]
-size = Vector2(310, 288.5)
+[sub_resource type="CircleShape2D" id="CircleShape2D_d21ai"]
+radius = 405.415
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rj586"]
+bg_color = Color(2.81565e-06, 0.609098, 0.117314, 1)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_q6r6c")
@@ -27,7 +34,7 @@ visible = false
 
 [node name="bullet" type="Sprite2D" parent="Storage"]
 process_mode = 4
-position = Vector2(-424, 40)
+position = Vector2(-423, 40)
 scale = Vector2(0.78125, 0.234375)
 texture = ExtResource("2_epypp")
 script = ExtResource("4_0hol4")
@@ -40,7 +47,7 @@ shape = SubResource("RectangleShape2D_kdubu")
 
 [node name="Enemy1" type="CharacterBody2D" parent="Storage"]
 process_mode = 4
-position = Vector2(-169, -130)
+position = Vector2(-721, -187)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("3_epypp")
@@ -60,7 +67,17 @@ offset_bottom = -78.0
 value = 100.0
 show_percentage = false
 
+[node name="Area2D" type="Area2D" parent="Storage/Enemy1"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Storage/Enemy1/Area2D"]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_d21ai")
+
 [node name="Player" type="CharacterBody2D" parent="."]
+collision_layer = 9
+collision_mask = 9
 script = ExtResource("1_0e48y")
 
 [node name="Icon" type="Sprite2D" parent="Player"]
@@ -75,12 +92,12 @@ position = Vector2(0, -0.75)
 shape = SubResource("RectangleShape2D_epypp")
 
 [node name="Area2D" type="Area2D" parent="Player"]
+scale = Vector2(0.971633, 0.901641)
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
-scale = Vector2(2.805, 2.805)
-shape = SubResource("RectangleShape2D_q6r6c")
+shape = SubResource("CircleShape2D_d21ai")
 
 [node name="Xpcontrol" type="Control" parent="Player"]
 process_mode = 3
@@ -94,36 +111,20 @@ scale = Vector2(0.942767, 1)
 
 [node name="ProgressBar" type="ProgressBar" parent="Player/Xpcontrol"]
 layout_mode = 0
-offset_right = 780.0
-offset_bottom = 27.0
+offset_top = 53.0
+offset_right = 748.0
+offset_bottom = 80.0
 script = ExtResource("6_kdubu")
 
 [node name="Node2D" type="Node2D" parent="Player/Xpcontrol"]
 
-[node name="Button" type="Button" parent="Player/Xpcontrol/Node2D"]
-offset_left = 391.401
-offset_top = -266.0
-offset_right = 561.401
-offset_bottom = -45.0
-scale = Vector2(2.005, 2.005)
-text = "Faster Bullets"
-
-[node name="Button2" type="Button" parent="Player/Xpcontrol/Node2D"]
-offset_left = 890.994
-offset_top = -261.27
-offset_right = 1060.99
-offset_bottom = -40.27
-scale = Vector2(2.005, 2.005)
-text = "More Health
-"
-
-[node name="Button3" type="Button" parent="Player/Xpcontrol/Node2D"]
-offset_left = 1369.37
-offset_top = -256.0
-offset_right = 1549.37
-offset_bottom = -34.9999
-scale = Vector2(2.005, 2.005)
-text = "NEW ATTACK (\"Circle\")
-"
+[node name="Health" type="ProgressBar" parent="Player/Xpcontrol"]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 748.0
+offset_bottom = 28.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_rj586")
+value = 100.0
+script = ExtResource("7_d21ai")
 
 [connection signal="body_entered" from="Storage/bullet/Area2D" to="Storage/bullet" method="_on_area_2d_body_entered"]

@@ -11,3 +11,4 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == self.get_parent().get_node("Player"):
 		self.queue_free()
 		self.get_parent().get_node("Player").get_node("Xpcontrol").get_node("ProgressBar").xpclaim.call()
+		
